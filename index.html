@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Igor Carvalho - RA082180001</title>
+</head>
+<style>
+    table {
+        border-collapse: collapse;
+        width: 20%;
+    }
+
+    th,
+    td {
+        text-align: center;
+        padding: 8px;
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+    }
+
+    tr:nth-child(even) {
+        background-color: #f2f2f2;
+    }
+
+    thead {
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+    }
+
+    h1 {
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+    }
+
+    div {
+        height: 30%;
+        width: 30%;
+        display: inline-block;
+    }
+</style>
+<script>
+
+    function callApi() {
+        let URL = "https://parallelum.com.br/fipe/api/v1/carros/marcas"
+        let variavel;
+        let tbodyTag = document.getElementById("tableData");
+
+
+        fetch(URL)
+            .then(req => req.json())
+            .then(show => {
+                variavel = show; console.log(variavel); variavel.forEach(element => {
+                    let trTag = fillTable(element); tbodyTag.appendChild(trTag)
+                })
+            })
+    }
+    function callApiM() {
+        let URL = "https://parallelum.com.br/fipe/api/v1/motos/marcas"
+        let variavel;
+        let tbodyTag1 = document.getElementById("tableData1");
+
+
+        fetch(URL)
+            .then(req => req.json())
+            .then(show => {
+                variavel = show; console.log(variavel); variavel.forEach(element => {
+                    let trTag = fillTable1(element); tbodyTag1.appendChild(trTag)
+                })
+            })
+    }
+
+    function fillTable(tableData) {
+
+        let trTag = document.createElement("tr");
+        let tdTagCodigo = document.createElement("td");
+        let tdTagNome = document.createElement("td");
+        tdTagCodigo.innerHTML = tableData.codigo;
+        trTag.appendChild(tdTagCodigo);
+        tdTagNome.innerHTML = tableData.nome;
+        trTag.appendChild(tdTagNome);
+
+
+        return trTag;
+    }
+    function fillTable1(tableData1) {
+
+        let trTag = document.createElement("tr");
+        let tdTagCodigo = document.createElement("td");
+        let tdTagNome = document.createElement("td");
+        tdTagCodigo.innerHTML = tableData1.codigo;
+        trTag.appendChild(tdTagCodigo);
+        tdTagNome.innerHTML = tableData1.nome;
+        trTag.appendChild(tdTagNome);
+
+
+        return trTag;
+    }
+
+</script>
+
+
+<body>
+
+    <h1>Lista de marcas de carros</h1>
+    <div id="Carros">
+        <p>
+            <button onclick="callApi();"> Call API - Carros </button>
+        </p>
+
+        <p>
+        <table>
+            <thead>
+                <tr>
+                    <th>Código</th>
+                    <th>Nome</th>
+                </tr>
+            </thead>
+            <tbody id="tableData">
+            </tbody>
+        </table>
+        </p>
+    </div>
+
+
+    <div id="Motos">
+        <p>
+            <button onclick="callApiM();"> Call API - Motos</button>
+        </p>
+
+        <p>
+        <table>
+            <thead>
+                <tr>
+                    <th>Código</th>
+                    <th>Nome</th>
+                </tr>
+            </thead>
+            <tbody id="tableData1">
+            </tbody>
+        </table>
+        </p>
+    </div>
+
+    <div id="Grafico">
+
+
+
+    </div>
+</body>
+
+</html>
